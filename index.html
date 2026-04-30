@@ -820,7 +820,7 @@
   <h2 class="section-title">Forming engineers work in<br>disconnected chaos</h2>
   <p class="section-sub">Blank development, simulation setup, documentation, reporting, and supplier coordination — all in separate tools, spreadsheets, and email chains. Nobody built the connective layer.</p>
 
-  <div class="problem-grid">
+  <div class="problem-grid" style="grid-template-columns:repeat(3,1fr);">
     <div class="problem-card">
       <div class="problem-icon">
         <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
@@ -841,27 +841,6 @@
       </div>
       <h3>20 reports, 20 formats</h3>
       <p>OEMs receive feasibility studies from every supplier in a different format. Missing data, inconsistent quality, rework on both sides.</p>
-    </div>
-    <div class="problem-card">
-      <div class="problem-icon">
-        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-      </div>
-      <h3>Six-figure price tags per seat</h3>
-      <p>Leading simulation tools cost a fortune and solve only one piece. Nothing exists for the workflow and documentation around them.</p>
-    </div>
-    <div class="problem-card">
-      <div class="problem-icon">
-        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      </div>
-      <h3>Knowledge stays in heads</h3>
-      <p>Junior engineers start from blank spreadsheets. Senior engineers carry institutional knowledge that disappears when they leave.</p>
-    </div>
-    <div class="problem-card">
-      <div class="problem-icon">
-        <svg viewBox="0 0 24 24"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      </div>
-      <h3>Errors at every handoff</h3>
-      <p>Copy-paste between tools, manual data entry, format inconsistencies. Every transition between tools is a place where mistakes happen.</p>
     </div>
   </div>
 </section>
@@ -934,6 +913,108 @@
     <div style="background:var(--bg2);padding:36px 32px;">
       <div style="font-family:var(--mono);font-size:11px;color:var(--red);letter-spacing:0.08em;margin-bottom:24px;">MARKET INCUMBENTS — THE OLD WAY</div>
       <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">Simulation in one tool, nesting in another</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Best-in-class solvers — but completely isolated. No connection between tools, results, or cost.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">Reporting in spreadsheets</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Manual copy-paste. Every engineer formats differently. Every client receives something different.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">Steep learning curves</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Every new engineer starts from zero. Quality depends entirely on who is in the room.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">Brittle scripted automation</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Scripts break sporadically. Engineers spend hours debugging automation instead of doing engineering.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">No market standard</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Every engineer builds their own solution. Nothing is consistent, nothing is transferable, nothing scales.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMSYNQ WAY -->
+    <div style="background:rgba(46,155,219,0.04);padding:36px 32px;border-left:1px solid var(--accent-border);">
+      <div style="font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:0.08em;margin-bottom:24px;">WITH FORMSYNQ</div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">Best solver and nesting — integrated</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Engineers keep the tools they know. FormSynq connects them — results, nesting, cost all in one place.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">Standardised client-ready reports</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Generated in one go. Customisable per client. Always consistent — every engineer, every project.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">Guided workflow from day one</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Structured process guides every engineer through the same steps. Junior engineers perform like seniors.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">Native automation — no scripts</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Automation built into the platform. No maintenance, no debugging. It works every time.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">One standard for the entire industry</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Same workflow, same output, every engineer, every project. The standard the industry never had.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
         <div style="display:flex;gap:14px;align-items:flex-start;">
           <div style="width:18px;height:18px;border-radius:50%;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
             <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
