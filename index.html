@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FormSynq — Sheet Metal Forming, Reimagined</title>
+<meta name="description" content="AI-powered platform for sheet metal forming engineers. From blank development to final report — faster, cheaper, standardised.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;500;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0A0C0F;
+    --bg2: #111318;
+    --bg3: #171B22;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #F0F2F5;
+    --sub: rgba(240,242,245,0.5);
+    --sub2: rgba(240,242,245,0.28);
+    --accent: #2E9BDB;
+    --accent2: #1A7FBF;
+    --accent-soft: rgba(46,155,219,0.08);
+    --accent-border: rgba(46,155,219,0.2);
+    --green: #22C55E;
+    --amber: #F59E0B;
+    --red: #EF4444;
+    --mono: 'DM Mono', monospace;
+    --display: 'Syne', sans-serif;
+    --body: 'Inter', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(10,12,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'DM Sans','Helvetica Neue',sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .nav-logo .synq { color: #2E9BDB; }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .nav-link {
+    font-size: 13px;
+    color: var(--sub);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover { color: var(--text); }
+
+  .nav-cta {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+    border: 1px solid var(--accent-border);
+    padding: 7px 18px;
+    border-radius: 6px;
+    background: var(--accent-soft);
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-cta:hover {
+    background: rgba(46,155,219,0.15);
+    border-color: rgba(46,155,219,0.4);
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(46,155,219,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(46,155,219,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 100%);
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(46,155,219,0.12) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    border: 1px solid var(--accent-border);
+    background: var(--accent-soft);
+    padding: 5px 14px;
+    border-radius: 100px;
+    margin-bottom: 32px;
+    letter-spacing: 0.06em;
+    position: relative;
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero-title {
+    font-family: 'Calibri', 'Calibri Light', sans-serif;
+    font-size: clamp(42px, 6vw, 76px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+    margin-bottom: 24px;
+    position: relative;
+    max-width: 900px;
+    color: #fff;
+  }
+
+  .hero-title .line2 { color: #2E9BDB; }
+
+  .hero-sub {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--sub);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+    position: relative;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    position: relative;
+  }
+
+  .btn-primary, .btn-secondary {
+    min-width: 180px;
+    text-align: center;
+  }
+
+  .btn-primary {
+    font-family: var(--body);
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    background: var(--accent);
+    border: none;
+    padding: 13px 28px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+
+  .btn-secondary {
+    font-family: var(--body);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--sub);
+    background: transparent;
+    border: 1px solid var(--border2);
+    padding: 13px 28px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+
+  /* STATS BAR */
+  .stats-bar {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+    padding: 28px 48px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 0 24px;
+    border-right: 1px solid var(--border);
+  }
+
+  .stat-item:last-child { border-right: none; }
+
+  .stat-number {
+    font-family: var(--display);
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--sub2);
+    text-align: center;
+    letter-spacing: 0.03em;
+  }
+
+  /* PROBLEM */
+  .section {
+    padding: 100px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .section-title {
+    font-family: var(--display);
+    font-size: clamp(28px, 3.5vw, 42px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+
+  .section-sub {
+    font-size: 17px;
+    color: var(--sub);
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 600px;
+    margin-bottom: 56px;
+  }
+
+  /* PROBLEM CARDS */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .problem-card {
+    background: var(--bg2);
+    padding: 32px 28px;
+    transition: background 0.2s;
+  }
+
+  .problem-card:hover { background: var(--bg3); }
+
+  .problem-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(239,68,68,0.1);
+    border: 1px solid rgba(239,68,68,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+  .problem-icon svg { width: 16px; height: 16px; stroke: var(--red); fill: none; stroke-width: 1.5; }
+
+  .problem-card h3 {
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .problem-card p {
+    font-size: 13px;
+    color: var(--sub);
+    line-height: 1.6;
+  }
+
+  /* SOLUTION */
+  .solution-section {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 100px 48px;
+  }
+
+  .solution-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .workflow-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 56px;
+  }
+
+  .workflow-step {
+    background: var(--bg3);
+    padding: 28px 24px;
+    position: relative;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+  }
+
+  .workflow-step:hover {
+    background: rgba(46,155,219,0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(46,155,219,0.12);
+    z-index: 1;
+  }
+
+  .workflow-step:hover .step-num { color: #2E9BDB; }
+  .workflow-step:hover h3 { color: #fff; }
+
+  .step-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .workflow-step h3 {
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .workflow-step p {
+    font-size: 12px;
+    color: var(--sub2);
+    line-height: 1.5;
+  }
+
+  .step-active {
+    background: rgba(46,155,219,0.06);
+    border-bottom: 2px solid var(--accent);
+  }
+
+  /* INTEGRATION TABLE */
+  .integration-section {
+    padding: 100px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .int-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 48px;
+    font-size: 13px;
+  }
+
+  .int-table th {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--sub2);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 400;
+  }
+
+  .int-table td {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    color: var(--sub);
+    vertical-align: middle;
+  }
+
+  .int-table tr:hover td { background: var(--bg2); }
+
+  .int-table .domain-cell {
+    font-weight: 500;
+    color: var(--text);
+    font-size: 13px;
+  }
+
+  .check { color: var(--green); font-size: 14px; }
+  .dash { color: var(--border2); }
+  .fs-own {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-border);
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  /* AI AGENTS */
+  .agents-section {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 100px 48px;
+  }
+
+  .agents-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .agents-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 48px;
+  }
+
+  .agent-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    transition: border-color 0.2s;
+  }
+
+  .agent-card:hover { border-color: var(--accent-border); }
+
+  .agent-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--sub2);
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .agent-card h3 {
+    font-family: var(--display);
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+
+  .agent-card p {
+    font-size: 11px;
+    color: var(--sub2);
+    line-height: 1.5;
+  }
+
+  /* PLATFORM PLAY */
+  .platform-section {
+    padding: 100px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .platform-box {
+    background: linear-gradient(135deg, rgba(46,155,219,0.06) 0%, rgba(46,155,219,0.02) 100%);
+    border: 1px solid var(--accent-border);
+    border-radius: 16px;
+    padding: 56px 64px;
+    margin-top: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .platform-box::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(46,155,219,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .platform-box blockquote {
+    font-family: var(--display);
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+    color: var(--text);
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  .platform-box blockquote em {
+    color: var(--accent);
+    font-style: normal;
+  }
+
+  .platform-box p {
+    font-size: 15px;
+    color: var(--sub);
+    font-weight: 300;
+    max-width: 580px;
+    line-height: 1.7;
+  }
+
+  .network-steps {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .net-step {
+    font-size: 12px;
+    color: var(--sub);
+    padding: 8px 16px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+  }
+
+  .net-arrow {
+    font-size: 14px;
+    color: var(--accent);
+    padding: 0 12px;
+    flex-shrink: 0;
+  }
+
+  /* FOUNDER */
+  .founder-section {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 100px 48px;
+  }
+
+  .founder-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .founder-text .section-title { margin-bottom: 20px; }
+
+  .founder-text p {
+    font-size: 16px;
+    color: var(--sub);
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .founder-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 36px;
+  }
+
+  .founder-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--display);
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .founder-card h3 {
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .founder-card .founder-role {
+    font-size: 13px;
+    color: var(--sub2);
+    margin-bottom: 20px;
+    font-family: var(--mono);
+  }
+
+  .founder-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .ftag {
+    font-size: 11px;
+    font-family: var(--mono);
+    color: var(--sub);
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
+  /* CTA */
+  .cta-section {
+    padding: 100px 48px;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .cta-section .section-title { margin-bottom: 16px; }
+  .cta-section p { font-size: 17px; color: var(--sub); font-weight: 300; line-height: 1.7; margin-bottom: 40px; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  footer .logo {
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  footer .logo span { color: var(--accent); }
+
+  footer p {
+    font-size: 12px;
+    color: var(--sub2);
+    font-family: var(--mono);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-badge { animation: fadeUp 0.5s ease forwards; }
+  .hero-title { animation: fadeUp 0.5s 0.1s ease both; }
+  .hero-sub   { animation: fadeUp 0.5s 0.2s ease both; }
+  .hero-actions { animation: fadeUp 0.5s 0.3s ease both; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-right { gap: 16px; }
+    .hero { padding: 100px 24px 60px; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 24px; gap: 1px; background: var(--border); }
+    .stat-item { border-right: none; border-bottom: 1px solid var(--border); padding: 20px; }
+    .section { padding: 60px 24px; }
+    .problem-grid { grid-template-columns: 1fr; }
+    .workflow-grid { grid-template-columns: repeat(2, 1fr); }
+    .agents-grid { grid-template-columns: 1fr; }
+    .solution-section { padding: 60px 24px; }
+    .platform-section, .integration-section { padding: 60px 24px; }
+    .platform-box { padding: 36px 28px; }
+    .founder-section { padding: 60px 24px; }
+    .founder-inner { grid-template-columns: 1fr; gap: 40px; }
+    .agents-section { padding: 60px 24px; }
+    .cta-section { padding: 60px 24px; }
+    footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px; }
+    .network-steps { flex-direction: column; align-items: flex-start; }
+    .net-arrow { transform: rotate(90deg); padding: 4px 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Form<span class="synq">Synq</span></a>
+  <div class="nav-right">
+    <a href="#solution" class="nav-link">Solution</a>
+    <a href="#platform" class="nav-link">Platform</a>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-badge">
+    <div class="badge-dot"></div>
+    Early access — forming engineers
+  </div>
+
+  <h1 class="hero-title">
+    Sheet Metal Forming.<br>
+    <span class="line2">Finally Connected.</span>
+  </h1>
+
+  <p class="hero-sub">
+    One AI-powered platform covering the entire forming engineering process — from Design Pre-Development phase to Simulation setup, processing, detailed reporting to Serial Production.
+  </p>
+
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary">Request early access</a>
+    <a href="#solution" class="btn-secondary">See how it works</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-number">60%+</div>
+    <div class="stat-label">At least — reduction in cycle time</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">50%+</div>
+    <div class="stat-label">At least — lower process cost</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">40%+</div>
+    <div class="stat-label">At least — faster reporting</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">17</div>
+    <div class="stat-label">AI agents — offline LLMs</div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="section">
+  <span class="section-tag">The problem</span>
+  <h2 class="section-title">Forming engineers work in<br>disconnected chaos</h2>
+  <p class="section-sub">Blank development, simulation setup, documentation, reporting, and supplier coordination — all in separate tools, spreadsheets, and email chains. Nobody built the connective layer.</p>
+
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="problem-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <h3>Disconnected tools</h3>
+      <p>Engineers switch between simulation solvers, nesting software, spreadsheets, and email on every single project. No single source of truth.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <h3>Weeks, not days</h3>
+      <p>Hardware iteration in some countries takes days. In Europe it can take at least weeks or a month. Manual documentation and coordination is the bottleneck nobody fixed.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      </div>
+      <h3>20 reports, 20 formats</h3>
+      <p>OEMs receive feasibility studies from every supplier in a different format. Missing data, inconsistent quality, rework on both sides.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      </div>
+      <h3>Six-figure price tags per seat</h3>
+      <p>Leading simulation tools cost a fortune and solve only one piece. Nothing exists for the workflow and documentation around them.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h3>Knowledge stays in heads</h3>
+      <p>Junior engineers start from blank spreadsheets. Senior engineers carry institutional knowledge that disappears when they leave.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">
+        <svg viewBox="0 0 24 24"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <h3>Errors at every handoff</h3>
+      <p>Copy-paste between tools, manual data entry, format inconsistencies. Every transition between tools is a place where mistakes happen.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="solution-section" id="solution">
+  <div class="solution-inner">
+    <span class="section-tag">The solution</span>
+    <h2 class="section-title">One platform. The entire process.</h2>
+    <p class="section-sub">FormSynq does not replace the best tools. It integrates them — your simulation solver, your nesting software — into one structured workflow with AI assistance at every step.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:56px;">
+      <div class="workflow-step step-active">
+        <span class="step-num">01</span>
+        <h3>Blank Development</h3>
+        <p>Best-in-class nesting software integration, blank iterations tracked, geometry history preserved.</p>
+      </div>
+      <div class="workflow-step">
+        <span class="step-num">02</span>
+        <h3>Simulation Setup</h3>
+        <p>Tool parts, blank parts, mesh parameters, material cards — structured and versioned.</p>
+      </div>
+      <div class="workflow-step">
+        <span class="step-num">03</span>
+        <h3>Result Analysis</h3>
+        <p>Thinning maps, FLD results, run comparison — all in one view, AI-assisted interpretation.</p>
+      </div>
+      <div class="workflow-step">
+        <span class="step-num">04</span>
+        <h3>Nesting</h3>
+        <p>Auto and manual nesting, coil width optimisation, multi-supplier comparison.</p>
+      </div>
+      <div class="workflow-step">
+        <span class="step-num">05</span>
+        <h3>Post Processing</h3>
+        <p>Laser trim, hole count, double cut — structured and exportable.</p>
+      </div>
+      <div class="workflow-step">
+        <span class="step-num">06</span>
+        <h3>Cost Engineering</h3>
+        <p>Structured cost breakdown per run, baked into the workflow not bolted on.</p>
+      </div>
+      <div class="workflow-step">
+        <span class="step-num">07</span>
+        <h3>Sustainability</h3>
+        <p>CO₂ footprint per part, Scope 1/2/3 breakdown, annual volume projection.</p>
+      </div>
+      <div class="workflow-step step-active">
+        <span class="step-num">08</span>
+        <h3>Standardised Report</h3>
+        <p>Part Information Document, FS Document, Cost Report — generated in one go.</p>
+      </div>
+      <div class="workflow-step">
+        <span class="step-num">09</span>
+        <h3>Structured Data Management</h3>
+        <p>Automatic folder structure per project — every run, result, and document tracked and organised from day one.</p>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="integration-section">
+  <span class="section-tag">Market Incumbents vs FormSynq</span>
+  <h2 class="section-title">The Old Way vs FormSynq</h2>
+  <p class="section-sub">FormSynq integrates the best simulation solver and the best nesting software your team already uses — and adds everything that was always missing around them.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:48px;">
+
+    <!-- OLD WAY -->
+    <div style="background:var(--bg2);padding:36px 32px;">
+      <div style="font-family:var(--mono);font-size:11px;color:var(--red);letter-spacing:0.08em;margin-bottom:24px;">MARKET INCUMBENTS — THE OLD WAY</div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">Simulation in one tool</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Best-in-class solver — but completely isolated. Results stay inside the tool.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">Nesting in another tool</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Best-in-class nesting software — but standalone. No connection to simulation runs or cost.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">Reporting in spreadsheets</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Manual copy-paste. Every engineer formats differently. Every client receives something different.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">Cost and sustainability manually</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Separate sheets, often done late or skipped. No connection to simulation or nesting data.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">No AI, no pattern recognition</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Every engineer starts from zero. Past project knowledge lives in someone's head or is lost.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">Steep learning curves</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Every new engineer starts from zero. No structured workflow to follow — quality depends entirely on who is in the room.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">Prone to errors</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Manual data entry at every handoff between tools. Every transition is a place where mistakes happen and go undetected.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">Brittle scripted automation</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Scripts break sporadically. Nobody knows why. Engineers spend hours debugging automation instead of doing engineering.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">No market standard</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Every engineer, every company builds their own solution. Nothing is consistent, nothing is transferable, nothing scales.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMSYNQ WAY -->
+    <div style="background:rgba(46,155,219,0.04);padding:36px 32px;border-left:1px solid var(--accent-border);">
+      <div style="font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:0.08em;margin-bottom:24px;">WITH FORMSYNQ</div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">Best simulation solver — integrated</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Engineers keep the solver they know. FormSynq structures setup, tracks runs, and imports results directly.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">Best nesting software — integrated</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Nesting results connect directly to blank history, coil supplier data, and cost calculation.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">Standardised client-ready reports</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Part Information Document, FS Document, Cost Report — generated in one go. Customisable per client. Always consistent.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">Cost and sustainability built in</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Connected to every run automatically. No separate sheet. No manual calculation. Always current.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">17 AI agents, triggered by engineering events</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Pattern recognition across past projects. Junior engineers follow the same workflow as seniors.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">Guided workflow from day one</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Structured process guides every engineer through the same steps. Junior engineers perform like seniors from the start.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">Errors caught automatically</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">AI agents flag anomalies at every step before they become problems. Fewer decision points where mistakes happen.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">Native automation — no scripts</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Automation is built into the platform. No scripts, no maintenance, no debugging. It works every time.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;">One standard for the entire industry</div>
+            <div style="font-size:12px;color:var(--sub2);line-height:1.5;">Same workflow, same output, every engineer, every project. FormSynq is the standard the industry has never had.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- PLATFORM PLAY -->
+<section class="platform-section" id="platform">
+  <div class="platform-box">
+    <blockquote>
+      Not just a productivity tool.<br><em>A data standard.</em>
+    </blockquote>
+    <p style="font-size:18px;color:var(--sub);font-weight:300;line-height:1.8;max-width:680px;margin-top:24px;">
+      Built by a forming engineer who has lived through the pain of fragmented automation, scripts, manual setups, steep learning curves, manual reporting, and error-prone systems.
+    </p>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section class="founder-section">
+  <div class="founder-inner">
+    <div class="founder-text">
+      <span class="section-tag">The founder</span>
+      <h2 class="section-title">Built by the Forming Engineer who lived through the pain</h2>
+      <p>A forming engineer with a decade of experience in press hardening and cold forming — blank development, simulation, tooling, cost engineering. This is not a software person who read about the industry.</p>
+      <p>FormSynq exists because the person who lived this problem every day finally decided to fix it.</p>
+    </div>
+    <div class="founder-card">
+      <div class="founder-avatar">F</div>
+      <h3>Founder & CEO</h3>
+      <div class="founder-role">FormSynq · Feb 2026 – Present</div>
+      <div class="founder-tags">
+        <span class="ftag">Press hardening</span>
+        <span class="ftag">Cold forming</span>
+        <span class="ftag">Blank development</span>
+        <span class="ftag">Simulation</span>
+        <span class="ftag">Tooling</span>
+        <span class="ftag">Cost engineering</span>
+        <span class="ftag">Decade of domain experience</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <span class="section-tag">Early access</span>
+  <h2 class="section-title">FormSynq is in active development</h2>
+  <p>We are working with a small group of forming engineers to shape the product. If you work in press hardening or cold forming and want to be involved, get in touch.</p>
+  <a href="mailto:contact@formsynq.de" class="btn-primary">contact@formsynq.de</a>
+</section>
+
+<footer>
+  <div class="logo" style="font-family:'DM Sans','Helvetica Neue',sans-serif;font-size:16px;font-weight:700;color:#fff;">Form<span style="color:#2E9BDB;">Synq</span></div>
+  <p>© 2026 FormSynq · formsynq.de · contact@formsynq.de</p>
+</footer>
+
+</body>
+</html>
